@@ -157,6 +157,25 @@ We'll be observing how volumes behave and how to clone instances.
 1. Spin up the instance and poke around.  See if it looks the same as the AMI creator expects.
 1. Look in both the home directory and data volume
 
+## Search For Untagged Resources
+1. In the console, `Resource Groups`
+1. `Tag Editor`
+1. Select a region where you have resources
+1. Use `EC2` as your `Resource types` filter
+1. Click the *cog* and the `Project` tag to the table
+1. Notice how many resources are untagged making billing and other operations more difficult
+
+## Watch For Untagged Resources
+1. In the console, `Services`, `Config`, `Get Started`
+1. `All Resources` and check `Include global resources`
+1. `Create a bucket`
+1. `Create a role`
+1. Peruse the baked-in rules but don't select any
+1. `Next` and `Confirm`
+1. `Rules` and `Add rule`
+1. `Add Custom Rule`
+1. **TODO: we need to learn about Lambda first**
+
 # Tips and Tricks
 
 # Troubleshooting
