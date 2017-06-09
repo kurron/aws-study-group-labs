@@ -149,6 +149,13 @@ We'll be observing how volumes behave and how to clone instances.
 1. `Actions`, `Modify Image Permissions`, change to public
 
 ## Create An Instance Via Somebody Else's AMI
+1. In the console, verify that you are in the `N. Virginia` region,
+1. `Instances`
+1. `Launch Instance`
+1. `Community AMIs`
+1. Search for an AMI created by someone else in the class
+1. Spin up the instance and poke around.  See if it looks the same as the AMI creator expects.
+1. Look in both the home directory and data volume
 
 # Tips and Tricks
 
