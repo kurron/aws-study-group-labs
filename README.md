@@ -122,6 +122,8 @@ We'll be observing how volumes behave and how to clone instances.
 1. The volume already has a file system on it so **don't format the volume**
 1. `ls --all -l --human-readable /mnt/data`.  Is your file still there?
 
+# Lab 3: EC2 Virtual Servers (continued)
+
 ## Cloning An Instance Via An AMI
 1. Select the `Instances` view
 1. Select your original instance
