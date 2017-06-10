@@ -176,6 +176,22 @@ We'll be observing how volumes behave and how to clone instances.
 1. `Add Custom Rule`
 1. **TODO: we need to learn about Lambda first**
 
+# Lab 4: EC2 Virtual Servers (continued)
+
+## Create Role
+1. In the console, switch to the `IAM` view
+1. `Roles`, `Create new role`
+1. `AWS Service Role`,`Amazon EC2`, `Select`
+1. Select `AdministratorAccess`, `Next Step`
+1. Provide any `Role name` you want, eg, `ec2_administrative_access`
+1. Enhance the `Role description` to say something to the effect that this role has full rights.
+1. `Create Role`
+
+ 
+## Automate Instance Creation via Bash 
+## Automate Instance Creation via Ansible 
+## Automate Instance Creation via Terraform 
+
 # Tips and Tricks
 
 # Troubleshooting
