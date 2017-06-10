@@ -176,6 +176,13 @@ We'll be observing how volumes behave and how to clone instances.
 1. `Add Custom Rule`
 1. **TODO: we need to learn about Lambda first**
 
+## Termintation Protection
+1. Create a new EC2 instance of any size
+1. Ensure `Enable termination protection` is checked
+1. After the instance is up, use the console to terminate it. What happens?
+1. Stop the instance
+1. Use the console to terminate the instance.  What happens?
+
 # Lab 4: EC2 Virtual Servers (continued)
 
 ## Create Role
