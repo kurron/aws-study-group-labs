@@ -167,6 +167,16 @@ We'll be observing how volumes behave and how to clone instances.
 1. see if your file is still there
 1. Try and `Stop` the instance.  Will it let you?
 
+## Change the Instance Type
+1. select a stopped instance, a small type is preferred
+1. `Actions`, `Instance Settings`, `Change Instance Type`
+1. select something from a different family and is larger, eg.`m3.medium` costing $0.07/hour
+1. spin up the instance
+1. ssh into the instance
+1. poke around and verify the increased cores and ram, eg `cat /proc/meminfo`, `cat /proc/cpuinfo`, `top`
+1. stop the instance
+1. change the instance type back to what it was
+
 ## Search For Untagged Resources
 1. In the console, `Resource Groups`
 1. `Tag Editor`
