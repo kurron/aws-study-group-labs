@@ -157,6 +157,16 @@ We'll be observing how volumes behave and how to clone instances.
 1. Spin up the instance and poke around.  See if it looks the same as the AMI creator expects.
 1. Look in both the home directory and data volume
 
+## Using Ephemeral Storage
+1. Pull up [Amazon EC2 AMI Locator](https://cloud-images.ubuntu.com/locator/ec2/) 
+1. Find a `xenial` `hvm:instance-store` AMI and click on its id
+1. Select `m3.medium`, which will cost you $0.07/hour
+1. ssh into the instance
+1. place a file in the home directory
+1. `Reboot` the instance
+1. see if your file is still there
+1. Try and `Stop` the instance.  Will it let you?
+
 ## Search For Untagged Resources
 1. In the console, `Resource Groups`
 1. `Tag Editor`
