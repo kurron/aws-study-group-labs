@@ -187,7 +187,23 @@ We'll be observing how volumes behave and how to clone instances.
 1. Enhance the `Role description` to say something to the effect that this role has full rights.
 1. `Create Role`
 
- 
+## Create CLI Tool Instance
+1. In the console, ensure you are in the `N. Virginia` region
+1. `EC2`, `Instances`, `Launch`
+1. Switch to `Community AMIs` view and search for `ami-67b5ed71`
+1. Select any instance type you want but `t2.micro` or `t2.nano` should be just fine
+1. `Configure Instance Details`, **use the IAM role created in the previous step**. 
+1. `Add Storage`, `Add Tags`
+1. `Configure Security Group`, make sure to use one that is wide open, avoiding firewall issues
+1. `Review and Launch`, `Launch`
+1. Wait for the instance to spin up and ssh in
+1. `aws --version`
+1. `ansible --version`
+1. `terraform --version`
+1. `http --version`
+1. `jq --version`
+1. Verify that tab completion works on the `aws` command, eg `aws ec2 des` *tab key* 
+
 ## Automate Instance Creation via Bash 
 ## Automate Instance Creation via Ansible 
 ## Automate Instance Creation via Terraform 
