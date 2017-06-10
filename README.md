@@ -184,7 +184,7 @@ We'll be observing how volumes behave and how to clone instances.
 1. Use the console to terminate the instance.  What happens?
 
 ## Instance Metadata
-1. ssh in an instance
+1. ssh into an instance
 1. `curl http://169.254.169.254/latest/meta-data/` -- notice the trailing slash
 1. try different endpoints, eg `curl http://169.254.169.254/latest/meta-data/instance-d`
 
