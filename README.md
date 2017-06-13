@@ -125,6 +125,7 @@ We'll be observing how volumes behave and how to clone instances.
 # Lab 3: EC2 Virtual Servers (continued)
 
 ## Cloning An Instance Via An AMI
+1. Ensure your instance has a file that distinguishes yours from others
 1. Select the `Instances` view
 1. Select your original instance
 1. `Actions`, `Image`, `Create Image`
@@ -141,7 +142,7 @@ We'll be observing how volumes behave and how to clone instances.
 1. Launch the instance, wait for it to spin up and ssh into it
 1. See if OS patches need to be applied
 1. What files are in the home folder?
-1. What filer in the data folder? 
+1. What files in the data folder?
 
 ## Sharing An AMI
 1. In the console, select `AMIs`
