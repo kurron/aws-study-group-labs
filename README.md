@@ -180,7 +180,7 @@ We'll be observing how volumes behave and how to clone instances.
 
 # Lab 4: EC2 Virtual Servers (continued)
 
-## Termintation Protection
+## Termination Protection
 1. Create a new EC2 instance of any size
 1. Ensure `Enable termination protection` is checked
 1. After the instance is up, use the console to terminate it. What happens?
@@ -189,10 +189,19 @@ We'll be observing how volumes behave and how to clone instances.
 
 ## Instance Metadata
 1. ssh into an instance
-1. `curl http://169.254.169.254/latest/meta-data/` -- notice the trailing slash
-1. try different endpoints, eg `curl http://169.254.169.254/latest/meta-data/instance-d`
+1. `curl http://169.254.169.254/latest/meta-data/` -- **notice the trailing slash**
+1. try different endpoints, eg `curl http://169.254.169.254/latest/meta-data/instance-id`
 
 ## Expand Volume
+1. Spin up an existing EC2 instance, one that has the extra data volume attached
+1. ssh into the instance
+1. `df -Th` to note the size of the volumes
+1. From the console, find the data volume in the `Instances` view and click through
+1. From the `Volumes` view, `Actions`, `Modify Volume`
+1. Double the size of the volume and click `Modify`
+1. Once complete, `df -Th` to see that the volume is still at its original size
+1. `sudo resize2fs /dev/device-name` to expand the volume to its new size
+1. `df -Th` to verify that the file system has expanded to match the new volume size
 
 ## Search For Untagged Resources
 1. In the console, `Resource Groups`
