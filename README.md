@@ -178,6 +178,8 @@ We'll be observing how volumes behave and how to clone instances.
 1. stop the instance
 1. change the instance type back to what it was
 
+# Lab 4: EC2 Virtual Servers (continued)
+
 ## Termintation Protection
 1. Create a new EC2 instance of any size
 1. Ensure `Enable termination protection` is checked
@@ -189,6 +191,8 @@ We'll be observing how volumes behave and how to clone instances.
 1. ssh into an instance
 1. `curl http://169.254.169.254/latest/meta-data/` -- notice the trailing slash
 1. try different endpoints, eg `curl http://169.254.169.254/latest/meta-data/instance-d`
+
+## Expand Volume
 
 ## Search For Untagged Resources
 1. In the console, `Resource Groups`
@@ -208,10 +212,6 @@ We'll be observing how volumes behave and how to clone instances.
 1. `Rules` and `Add rule`
 1. `Add Custom Rule`
 1. **TODO: we need to learn about Lambda first**
-
-# Lab 4: EC2 Virtual Servers (continued)
-
-## Expand Volume
 
 ## Create Role
 1. In the console, switch to the `IAM` view
