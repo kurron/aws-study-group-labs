@@ -200,8 +200,12 @@ We'll be observing how volumes behave and how to clone instances.
 1. From the `Volumes` view, `Actions`, `Modify Volume`
 1. Double the size of the volume and click `Modify`
 1. Once complete, `df -Th` to see that the volume is still at its original size
-1. `sudo resize2fs /dev/device-name` to expand the volume to its new size
+1. `sudo file -s /dev/xvdb` to verify the volume's file system
+1. `lsblk` to verify that there is no partition that needs to be extended
+1. Note the difference in size reporte by `df` and `lsblk`
+1. `sudo resize2fs /dev/xvdb` to expand the volume to its new size
 1. `df -Th` to verify that the file system has expanded to match the new volume size
+1. `lsblk` and `df -h` should now agree
 
 ## Search For Untagged Resources
 1. In the console, `Resource Groups`
