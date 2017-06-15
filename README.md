@@ -207,6 +207,11 @@ We'll be observing how volumes behave and how to clone instances.
 1. `df -Th` to verify that the file system has expanded to match the new volume size
 1. `lsblk` and `df -h` should now agree
 
+# Lab 5: Elastic Load Balancers
+
+## Classic ELB
+## ELB (Application Load Balancer)
+
 ## Search For Untagged Resources
 1. In the console, `Resource Groups`
 1. `Tag Editor`
