@@ -86,9 +86,9 @@ We'll be observing how volumes behave and how to clone instances.
 1. Click `Volumes` in the console and select the volume that is attached as `/dev/sdb`
 1. Click `Actions` and `Create Snapshot`
 1. Use `Data` as the name and whatever `Description` you want
-1. `Create` and switch to `Snapshots` view 
+1. `Create` and switch to `Snapshots` view
 1. Examine the tags and notice only `Name` is provided
-1. Add in the missing tags by hand 
+1. Add in the missing tags by hand
 
 ## Cloning An Instance Via Launch More Like This
 1. Log into the console and bring up the `EC2 Dashboard`
@@ -96,7 +96,7 @@ We'll be observing how volumes behave and how to clone instances.
 1. Click `Actions` then `Launch More Like This`
 1. Click `Launch` and select the SSH key
 1. Wait for the instance to come up and then ssh into it
-1. In the console, edit the `Name` tag to read `Clone` 
+1. In the console, edit the `Name` tag to read `Clone`
 1. `sudo yum update` -- notice how the updates to be applied again
 1. `df --print-type --human-readable` -- is the second volume mounted?
 1. `lsblk --list --fs` -- is the second volume available?
@@ -104,21 +104,21 @@ We'll be observing how volumes behave and how to clone instances.
 
 ## Attaching A Volume To A Running Instance
 1. In the console, switch to `Instances` view and note the AZ id of the clone
-1. Stop the clone 
+1. Stop the clone
 1. In the console, switch to `Volumes` view
 1. Select the clone instance
 1. `Create Volume`
 1. Search by your snapshot's description and select it
-1. Select the same AZ that your instance lives in 
+1. Select the same AZ that your instance lives in
 1. `Create`
 1. Select the newly created volume (should be 100 GB in size)
 1. Fill in the tags
-1. `Actions`, `Attach Volume` 
+1. `Actions`, `Attach Volume`
 1. Select your clone instance
 1. Leave `Device` to its default value
 1. `Attach` and wait for it to complete
 1. ssh into your instance
-1. Run the the prevously outlined steps to mount the volume 
+1. Run the the previously outlined steps to mount the volume
 1. The volume already has a file system on it so **don't format the volume**
 1. `ls --all -l --human-readable /mnt/data`.  Is your file still there?
 
@@ -159,7 +159,7 @@ We'll be observing how volumes behave and how to clone instances.
 1. Look in both the home directory and data volume
 
 ## Using Ephemeral Storage
-1. Pull up [Amazon EC2 AMI Locator](https://cloud-images.ubuntu.com/locator/ec2/) 
+1. Pull up [Amazon EC2 AMI Locator](https://cloud-images.ubuntu.com/locator/ec2/)
 1. Find a `xenial` `hvm:instance-store` AMI and click on its id
 1. Select `m3.medium`, which will cost you $0.07/hour
 1. ssh into the instance
@@ -209,7 +209,44 @@ We'll be observing how volumes behave and how to clone instances.
 
 # Lab 5: Elastic Load Balancers
 
+## Create Docker AMI
+1. Spin up an Amazon Linux EC2 instance, `t2.nano` or `t2.micro` will do
+1. `sudo yum update` -- patch any security vulnerabilities
+1. `sudo yum install docker` -- install Docker runtime
+1. `groups ec2-user`
+1. `sudo usermod --append --groups docker ec2-user`
+1. `groups ec2-user`
+1. `sudo service docker restart`
+1. `docker info`
+1. install the Docker container using the script below
+1. `docker ps`
+1. `curl localhost:8080/operations/health | python -m json.tool`
+1. `curl localhost:8080/ | python -m json.tool`
+1. create an AMI out of it.  We'll use it to create multiple instances.
+
+### Docker Container Installation Script
+```
+#!/bin/bash
+
+CMD="docker run --detach \
+                --name aws-echo \
+                --network host \
+                --restart always \
+                kurron/spring-cloud-aws-echo:latest"
+echo ${CMD}
+${CMD}
+```
+
+## Spin Up Instances
+1. Use the AMI to launch at least 2 small instances.
+1. Use a wide open security group to avoid firewall issues
+1. Make sure the instances get assigned a public ip address
+1. After they spin up, grab the public ip addresses and test them from your Windows box or another EC2 instance
+1. `curl ip-address:8080/operations/health | python -m json.tool`
+1. `curl ip-address:8080/ | python -m json.tool`
+
 ## Classic ELB
+
 ## ELB (Application Load Balancer)
 
 ## Search For Untagged Resources
@@ -245,7 +282,7 @@ We'll be observing how volumes behave and how to clone instances.
 1. `EC2`, `Instances`, `Launch`
 1. Switch to `Community AMIs` view and search for `ami-67b5ed71`
 1. Select any instance type you want but `t2.micro` or `t2.nano` should be just fine
-1. `Configure Instance Details`, **use the IAM role created in the previous step**. 
+1. `Configure Instance Details`, **use the IAM role created in the previous step**.
 1. `Add Storage`, `Add Tags`
 1. `Configure Security Group`, make sure to use one that is wide open, avoiding firewall issues
 1. `Review and Launch`, `Launch`
@@ -255,11 +292,11 @@ We'll be observing how volumes behave and how to clone instances.
 1. `terraform --version`
 1. `http --version`
 1. `jq --version`
-1. Verify that tab completion works on the `aws` command, eg `aws ec2 des` *tab key* 
+1. Verify that tab completion works on the `aws` command, eg `aws ec2 des` *tab key*
 
-## Automate Instance Creation via Bash 
-## Automate Instance Creation via Ansible 
-## Automate Instance Creation via Terraform 
+## Automate Instance Creation via Bash
+## Automate Instance Creation via Ansible
+## Automate Instance Creation via Terraform
 
 # Tips and Tricks
 
