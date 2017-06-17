@@ -246,6 +246,46 @@ ${CMD}
 1. `curl ip-address:8080/ | python -m json.tool`
 
 ## Classic ELB
+1. `Load Balancers`, `Create Load Balancer`
+1. Select `Classic Load Balancer`, we create an `Application Load Balancer` later
+1. Name the balancer so you know it is the classic balancer
+1. `Load Balancer Port` should be `80` and `Instance Port` should be `8080`
+1. `Assign Security Groups`, select a wide open group
+1. `Configure Security Settings`, `Configure Health Check`
+1. `Ping Port` should be `8080`
+1. `Ping Path` should be `/operations/health`
+1. `Interval` should be `10` seconds
+1. `Healthy threshold` should be `2`
+1. `Add EC2 Instances`
+1. Select your newly spun up instances, `Add Tags`
+1. Fill in the tags, `Review and Create`
+1. `Create`
+1. Select the `Instances` tab and wait for the instance status to be `InService`
+1. Note the balancer's DNS name
+1. `curl lb-dns-name:80/ | python -m json.tool`
+
+## Classic ELB Failover
+1. Create a script to continually hit the ELB
+1. Run it and note the `served-by` value.  It should change with each request.
+1. In the console, pull up the `Instances` to see which instances are showing as healthy
+1. 
+
+### Load Balancer Watch Script
+```
+#!/bin/bash
+
+ELB=${1:-classic-load-balancer-1166062004.us-east-1.elb.amazonaws.com}
+DELAY=${2:-2}
+
+CMD="curl http://${ELB}:80/"
+
+for (( ; ; ))
+do
+#  echo ${CMD}
+   ${CMD} | python -m json.tool
+   sleep ${DELAY}
+done
+```
 
 ## ELB (Application Load Balancer)
 
