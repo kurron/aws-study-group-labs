@@ -247,7 +247,7 @@ echo ${CMD}
 ${CMD}
 ```
 
-## Spin Up Instances
+## Spin Up Classic ELB Instances
 1. Use the AMI to launch at least 3 small instances.
 1. Use a wide open security group to avoid firewall issues
 1. Make sure the instances get assigned a public ip address
@@ -290,11 +290,14 @@ ${CMD}
 1. Re-enable each service via `docker start aws-echo` and watch the script and console
 1. How would the health check settings affect how quickly instances get removed and added?
 1. How do availability zones affect the load balancer and the EC2 instances?
+1. If we wanted the load balancer to front more than one type of application, what would we do?
+1. What non-HTTP applications might you front with a load balancer?
 
-### Load Balancer Watch Script
+### Classic Load Balancer Watch Script
 ```
 #!/bin/bash
 
+# Your DNS name is going to be different
 ELB=${1:-classic-load-balancer-1166062004.us-east-1.elb.amazonaws.com}
 DELAY=${2:-2}
 
@@ -308,8 +311,15 @@ do
 done
 ```
 
+## Spin Up ELB Instances
+1. Create another Docker AMI, this time **do not install the docker container**
+1. Create 4 machines from the AMI but **install user data** with the Docker container script
+1. Have 2 instance be the `TLO` application, `APPLICATION_NAME=TLO`
+1. Have 2 instance be the `Mold-E` application, `APPLICATION_NAME=Mold-E`
+1. Hit the `/operations/info` endpoint and ensure the information is correct
+
 ## ELB (Application Load Balancer)
-1. 4 machines
+1.
 1. 2 mapped to /dolphins-suck
 1. 2 mapped to /bills-suck
 1. separate watcher scripts
