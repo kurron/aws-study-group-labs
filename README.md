@@ -221,6 +221,7 @@ We'll be observing how volumes behave and how to clone instances.
 1. install the Docker container using the script below
 1. `docker ps`
 1. `curl localhost:8080/operations/health | python -m json.tool`
+1. `curl localhost:8080/operations/info | python -m json.tool`
 1. `curl localhost:8080/ | python -m json.tool`
 1. create an AMI out of it.  We'll use it to create multiple instances.
 
@@ -228,10 +229,19 @@ We'll be observing how volumes behave and how to clone instances.
 ```
 #!/bin/bash
 
+APPLICATION_NAME=TLO
+HOST_NAME=$(curl http://169.254.169.254/latest/meta-data/hostname)
+AVAILABILITY_ZONE=$(curl http://169.254.169.254/latest/meta-data/placement/availability-zone)
+INSTANCE_ID=$(curl http://169.254.169.254/latest/meta-data/instance-id)
+INSTANCE_TYPE=$(curl http://169.254.169.254/latest/meta-data/instance-type)
+
 CMD="docker run --detach \
                 --name aws-echo \
                 --network host \
                 --restart always \
+                --env INFO_APPLICATION_NAME=${APPLICATION_NAME} \
+                --env INFO_APPLICATION_INSTANCE=${INSTANCE_TYPE}:${INSTANCE_ID} \
+                --env INFO_APPLICATION_LOCATION=${AVAILABILITY_ZONE}:${HOST_NAME} \
                 kurron/spring-cloud-aws-echo:latest"
 echo ${CMD}
 ${CMD}
@@ -243,6 +253,7 @@ ${CMD}
 1. Make sure the instances get assigned a public ip address
 1. After they spin up, grab the public ip addresses and test them from your Windows box or another EC2 instance
 1. `curl ip-address:8080/operations/health | python -m json.tool`
+1. `curl localhost:8080/operations/info | python -m json.tool`
 1. `curl ip-address:8080/ | python -m json.tool`
 
 ## Classic ELB
@@ -273,9 +284,9 @@ ${CMD}
 1. Select one instance and ssh into it
 1. `docker ps` to show the running containers
 1. `docker stop aws-echo` to turn off the container
-1. watch the watcher script.  Has service been disrupted?  How has the `served-by` changed?
+1. Watch the watcher script.  Has service been disrupted?  How has the `served-by` changed?
 1. Examine the balancer's `Monitoring` and `Instances` tabs
-1. repeat the process for another node.  How is service behaving now?
+1. Repeat the process for another node.  How is service behaving now?
 1. Re-enable each service via `docker start aws-echo` and watch the script and console
 1. How would the health check settings affect how quickly instances get removed and added?
 1. How do availability zones affect the load balancer and the EC2 instances?
@@ -298,6 +309,11 @@ done
 ```
 
 ## ELB (Application Load Balancer)
+1. 4 machines
+1. 2 mapped to /dolphins-suck
+1. 2 mapped to /bills-suck
+1. separate watcher scripts
+1. turn off an AZ
 
 ## Search For Untagged Resources
 1. In the console, `Resource Groups`
