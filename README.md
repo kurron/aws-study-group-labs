@@ -238,7 +238,7 @@ ${CMD}
 ```
 
 ## Spin Up Instances
-1. Use the AMI to launch at least 2 small instances.
+1. Use the AMI to launch at least 3 small instances.
 1. Use a wide open security group to avoid firewall issues
 1. Make sure the instances get assigned a public ip address
 1. After they spin up, grab the public ip addresses and test them from your Windows box or another EC2 instance
@@ -267,8 +267,18 @@ ${CMD}
 ## Classic ELB Failover
 1. Create a script to continually hit the ELB
 1. Run it and note the `served-by` value.  It should change with each request.
+1. Also note the `calculated-return-path` and how it reflects the "outside" view
+1. Note how we hit the balancer at port `80` but the service lives at `8080`
 1. In the console, pull up the `Instances` to see which instances are showing as healthy
-1. 
+1. Select one instance and ssh into it
+1. `docker ps` to show the running containers
+1. `docker stop aws-echo` to turn off the container
+1. watch the watcher script.  Has service been disrupted?  How has the `served-by` changed?
+1. Examine the balancer's `Monitoring` and `Instances` tabs
+1. repeat the process for another node.  How is service behaving now?
+1. Re-enable each service via `docker start aws-echo` and watch the script and console
+1. How would the health check settings affect how quickly instances get removed and added?
+1. How do availability zones affect the load balancer and the EC2 instances?
 
 ### Load Balancer Watch Script
 ```
@@ -277,7 +287,7 @@ ${CMD}
 ELB=${1:-classic-load-balancer-1166062004.us-east-1.elb.amazonaws.com}
 DELAY=${2:-2}
 
-CMD="curl http://${ELB}:80/"
+CMD="curl --silent http://${ELB}:80/"
 
 for (( ; ; ))
 do
