@@ -276,7 +276,7 @@ ${CMD}
 1. `curl lb-dns-name:80/ | python -m json.tool`
 
 ## Classic ELB Failover
-1. Create a script to continually hit the ELB
+1. Create a script to continually hit the ELB (see below)
 1. Run it and note the `served-by` value.  It should change with each request.
 1. Also note the `calculated-return-path` and how it reflects the "outside" view
 1. Note how we hit the balancer at port `80` but the service lives at `8080`
@@ -316,7 +316,7 @@ done
 1. Create 4 machines from the AMI but **install user data** with the Docker container script
 1. Have 2 instance be the `TLO` application, `APPLICATION_NAME=TLO`
 1. Have 2 instance be the `Mold-E` application, `APPLICATION_NAME=Mold-E`
-1. Hit the `/operations/info` endpoint and ensure the information is correct
+1. Hit the `/operations/info` endpoints of each and ensure the information is correct
 
 ## ELB (Application Load Balancer)
 1.
