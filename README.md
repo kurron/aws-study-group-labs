@@ -217,6 +217,7 @@ We'll be observing how volumes behave and how to clone instances.
 1. `sudo usermod --append --groups docker ec2-user`
 1. `groups ec2-user`
 1. `sudo service docker restart`
+1. log out and back into the instance or the next step will show an error
 1. `docker info`
 1. install the Docker container using the script below
 1. `docker ps`
@@ -274,6 +275,8 @@ ${CMD}
 1. Select the `Instances` tab and wait for the instance status to be `InService`
 1. Note the balancer's DNS name
 1. `curl lb-dns-name:80/ | python -m json.tool`
+
+# Lab 6: Elastic Load Balancers
 
 ## Classic ELB Failover
 1. Create a script to continually hit the ELB (see below)
