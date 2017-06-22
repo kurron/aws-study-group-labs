@@ -314,14 +314,15 @@ do
 done
 ```
 
+# Lab 7: Elastic Load Balancers (continued)
+
 ## Support Multiple Applications (Classic Load Balancer)
+1. TODO: deploy TLO and Mold-E on each node
 1. In the console, bring up the load balancer
 1. Reconfigure it so that one service can be accessed via port 80
 1. Reconfigure it so that the other service can be accessed via port 8080
 1. Can you actually do that?
 1. What is the best we can actually do with a classic balancer?
-
-# Lab 7: Elastic Load Balancers (continued)
 
 ## Spin Up ELB Instances (Application Load Balancer)
 1. Create another Docker AMI, this time **do not install the docker container**
