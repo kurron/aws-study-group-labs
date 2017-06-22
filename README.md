@@ -329,7 +329,25 @@ done
 1. Hit the `/operations/info` endpoints of each and ensure the information is correct
 
 ## ELB (Application Load Balancer)
-1.
+1. `Create Load Balancer`, `Application Load Balancer`
+1. `Name` can be anything you want
+1. `Scheme` should be `internet-facting`
+1. `Listeners` should be set to `HTTP` and port `80`
+1. Select **all** subnets in your VPC. The UI is odd in this context.
+1. Set your tags
+1. `Configure Security Settings`, `Configure Security Groups`
+1. Select or create a wide open group -- **all** ports and addresses
+1. `Configure Routing`
+1. `New Target Group` with `Name` of `TLO`, `Protocol` of `HTTP`, `Port` of `8080`
+1. `Health Checks` should be set to `HTTP` and `/operations/health`
+1. `Register Targets`
+1. Select **only the TLO instances** -- we need the others for another group
+1. `Review` and `Create`
+1. Wait for the balancer to be provisioned
+1. `View/edit rules`, hit the `+` to add a new rule
+1. `Path` should be set to `TLO` and `Forward to` to your TLO instances
+1. `Save`
+1. Test the ELB via `curl ALB-Experiment-763587424.us-west-2.elb.amazonaws.com/tlo`
 1. 2 mapped to /dolphins-suck
 1. 2 mapped to /bills-suck
 1. separate watcher scripts
