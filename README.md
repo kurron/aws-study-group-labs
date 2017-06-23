@@ -316,20 +316,65 @@ done
 
 # Lab 7: Elastic Load Balancers (continued)
 
+## Create A Multi-Application AMI
+1. Follow the instructions in the previous lab and create a Docker AMI
+1. **Use the script below** to install the correct containers. **Don't use the script in the original instructions.**
+1. For this example, we saved the script to `install-application.sh`
+1. `./install-application.sh TLO tlo 8080` - to install the TLO application at port 8080
+1. `./install-application.sh Mold-E mold-e 9090` - to install the Mold-E application at port 9090
+1. `curl --location localhost:8080/tlo | python -m json.tool`
+1. `curl --location localhost:8080/tlo/operations/health | python -m json.tool`
+1. `curl --location localhost:8080/tlo/operations/info | python -m json.tool`
+1. `curl --location localhost:9090/mold-e | python -m json.tool`
+1. `curl --location localhost:9090/mold-e/operations/health | python -m json.tool`
+1. `curl --location localhost:9090/mold-e/operations/info | python -m json.tool`
+1. Create the AMI
+
+### Docker Container Installation Script
+```
+#!/bin/bash
+
+APPLICATION_NAME=${1:-FOO}
+SERVER_PATH=${2:-foo}
+SERVER_PORT=${3:-1234}
+
+HOST_NAME=$(curl http://169.254.169.254/latest/meta-data/hostname)
+AVAILABILITY_ZONE=$(curl http://169.254.169.254/latest/meta-data/placement/availability-zone)
+INSTANCE_ID=$(curl http://169.254.169.254/latest/meta-data/instance-id)
+INSTANCE_TYPE=$(curl http://169.254.169.254/latest/meta-data/instance-type)
+
+CMD="docker run --detach \
+                --name ${APPLICATION_NAME} \
+                --network host \
+                --restart always \
+                --env INFO_APPLICATION_NAME=${APPLICATION_NAME} \
+                --env INFO_APPLICATION_INSTANCE=${INSTANCE_TYPE}:${INSTANCE_ID} \
+                --env INFO_APPLICATION_LOCATION=${AVAILABILITY_ZONE}:${HOST_NAME} \
+                --env SERVER_CONTEXT-PATH=/${SERVER_PATH} \
+                --env SERVER.PORT=${SERVER_PORT} \
+                kurron/spring-cloud-aws-echo:latest"
+echo ${CMD}
+${CMD}
+```
+
+## Spin Up Multi-Application Instances
+1. Use the newly created AMI to create 2 new instances
+1. Use `cURL` and ensure that both ports can be hit on each instance
+
 ## Support Multiple Applications (Classic Load Balancer)
-1. TODO: deploy TLO and Mold-E on each node
-1. In the console, bring up the load balancer
-1. Reconfigure it so that one service can be accessed via port 80
-1. Reconfigure it so that the other service can be accessed via port 8080
-1. Can you actually do that?
-1. What is the best we can actually do with a classic balancer?
+1. Create a classic ELB
+1. Map port `80` on the ELB to port `8080` in the instances
+1. Map port `90` on the ELB to port `9090` in the instances
+1. Use `cURL` and hit each port on the ELB
+1. Notice how each port maps to a different application
+1. Notice how we had to install **both** applications on each instance
 
 ## Spin Up ELB Instances (Application Load Balancer)
 1. Create another Docker AMI, this time **do not install the docker container**
-1. Create 4 machines from the AMI but **install user data** with the Docker container script
-1. Have 2 instance be the `TLO` application, `APPLICATION_NAME=TLO`
-1. Have 2 instance be the `Mold-E` application, `APPLICATION_NAME=Mold-E`
-1. Hit the `/operations/info` endpoints of each and ensure the information is correct
+1. Create 4 machines from the AMI but **install user data** with the Docker container script from the previous exercise
+1. Have 2 instance be the `TLO` application. `APPLICATION_NAME=TLO`, `SERVER_PATH=tlo`, `SERVER_PORT=8080`
+1. Have 2 instance be the `Mold-E` application. `APPLICATION_NAME=Mold-E`, `SERVER_PATH=mold-e`, `SERVER_PORT=9090`
+1. Hit the `/tlo/operations/info` and `/mold-e/operations/info` endpoints
 
 ## ELB (Application Load Balancer)
 1. `Create Load Balancer`, `Application Load Balancer`
@@ -342,7 +387,7 @@ done
 1. Select or create a wide open group -- **all** ports and addresses
 1. `Configure Routing`
 1. `New Target Group` with `Name` of `TLO`, `Protocol` of `HTTP`, `Port` of `8080`
-1. `Health Checks` should be set to `HTTP` and `/operations/health`
+1. `Health Checks` should be set to `HTTP` and `/tlo/operations/health`
 1. `Register Targets`
 1. Select **only the TLO instances** -- we need the others for another group
 1. `Review` and `Create`
@@ -350,9 +395,8 @@ done
 1. `View/edit rules`, hit the `+` to add a new rule
 1. `Path` should be set to `TLO` and `Forward to` to your TLO instances
 1. `Save`
-1. Test the ELB via `curl ALB-Experiment-763587424.us-west-2.elb.amazonaws.com/tlo`
-1. 2 mapped to /dolphins-suck
-1. 2 mapped to /bills-suck
+1. Test the ELB via `curl --follow ALB-Experiment-763587424.us-west-2.elb.amazonaws.com/tlo`
+1. create mapping to /mold-e
 1. separate watcher scripts
 1. turn off an AZ
 
