@@ -320,14 +320,14 @@ done
 1. Follow the instructions in the previous lab and create a Docker AMI
 1. **Use the script below** to install the correct containers. **Don't use the script in the original instructions.**
 1. For this example, we saved the script to `install-application.sh`
-1. `./install-application.sh TLO tlo 8080` - to install the TLO application at port 8080
-1. `./install-application.sh Mold-E mold-e 9090` - to install the Mold-E application at port 9090
-1. `curl --location localhost:8080/tlo | python -m json.tool`
-1. `curl --location localhost:8080/tlo/operations/health | python -m json.tool`
-1. `curl --location localhost:8080/tlo/operations/info | python -m json.tool`
-1. `curl --location localhost:9090/mold-e | python -m json.tool`
-1. `curl --location localhost:9090/mold-e/operations/health | python -m json.tool`
-1. `curl --location localhost:9090/mold-e/operations/info | python -m json.tool`
+1. `./install-application.sh TLO / 8080` - to install the TLO application at port 8080
+1. `./install-application.sh Mold-E / 9090` - to install the Mold-E application at port 9090
+1. `curl --location --silent localhost:8080 | python -m json.tool`
+1. `curl --location --silent localhost:8080/operations/health | python -m json.tool`
+1. `curl --location --silent localhost:8080/operations/info | python -m json.tool`
+1. `curl --location --silent localhost:9090 | python -m json.tool`
+1. `curl --location --silent localhost:9090/operations/health | python -m json.tool`
+1. `curl --location --silent localhost:9090/operations/info | python -m json.tool`
 1. Create the AMI
 
 ### Docker Container Installation Script
@@ -335,7 +335,7 @@ done
 #!/bin/bash
 
 APPLICATION_NAME=${1:-FOO}
-SERVER_PATH=${2:-foo}
+SERVER_PATH=${2:-/foo}
 SERVER_PORT=${3:-1234}
 
 HOST_NAME=$(curl http://169.254.169.254/latest/meta-data/hostname)
@@ -350,7 +350,7 @@ CMD="docker run --detach \
                 --env INFO_APPLICATION_NAME=${APPLICATION_NAME} \
                 --env INFO_APPLICATION_INSTANCE=${INSTANCE_TYPE}:${INSTANCE_ID} \
                 --env INFO_APPLICATION_LOCATION=${AVAILABILITY_ZONE}:${HOST_NAME} \
-                --env SERVER_CONTEXT-PATH=/${SERVER_PATH} \
+                --env SERVER_CONTEXT-PATH=${SERVER_PATH} \
                 --env SERVER.PORT=${SERVER_PORT} \
                 kurron/spring-cloud-aws-echo:latest"
 echo ${CMD}
@@ -360,20 +360,46 @@ ${CMD}
 ## Spin Up Multi-Application Instances
 1. Use the newly created AMI to create 2 new instances
 1. Use `cURL` and ensure that both ports can be hit on each instance
+1. `curl --location --silent 54.202.28.248:8080/operations/info | python -m json.tool`
+1. `curl --location --silent 54.202.28.248:9090/operations/info | python -m json.tool`
+1. `curl --location --silent 54.202.28.248:8080/ | python -m json.tool`
+1. `curl --location --silent 54.202.28.248:9090/ | python -m json.tool`
 
 ## Support Multiple Applications (Classic Load Balancer)
 1. Create a classic ELB
-1. Map port `80` on the ELB to port `8080` in the instances
-1. Map port `90` on the ELB to port `9090` in the instances
-1. Use `cURL` and hit each port on the ELB
+1. Map port `1024` on the ELB to port `8080` in the instances
+1. Map port `2048` on the ELB to port `9090` in the instances
+1. Use `/operations/health` for the health check
+1. Notice how only **one** of the two applications can provide the health check
+1. Use `cURL` and hit each port on the ELB (convenience script provided below)
 1. Notice how each port maps to a different application
 1. Notice how we had to install **both** applications on each instance
+1. What are some of the drawbacks to this technique?
+
+### Dual Application ELB Watch Script
+```
+#!/bin/bash
+
+ELB=${1:-dual-applications-classic-876351830.us-west-2.elb.amazonaws.com}
+DELAY=${2:-2}
+
+TLO="curl --location --silent ${ELB}:1024/operations/info"
+MOLDE="curl --location --silent ${ELB}:2048/operations/info"
+
+for (( ; ; ))
+do
+   ${TLO} | python -m json.tool
+   echo
+   ${MOLDE} | python -m json.tool
+   sleep ${DELAY}
+done
+```
 
 ## Spin Up ELB Instances (Application Load Balancer)
 1. Create another Docker AMI, this time **do not install the docker container**
 1. Create 4 machines from the AMI but **install user data** with the Docker container script from the previous exercise
-1. Have 2 instance be the `TLO` application. `APPLICATION_NAME=TLO`, `SERVER_PATH=tlo`, `SERVER_PORT=8080`
-1. Have 2 instance be the `Mold-E` application. `APPLICATION_NAME=Mold-E`, `SERVER_PATH=mold-e`, `SERVER_PORT=9090`
+1. Have 2 instance be the `TLO` application. `APPLICATION_NAME=TLO`, `SERVER_PATH=/tlo`, `SERVER_PORT=8080`
+1. Have 2 instance be the `Mold-E` application. `APPLICATION_NAME=Mold-E`, `SERVER_PATH=/mold-e`, `SERVER_PORT=9090`
 1. Hit the `/tlo/operations/info` and `/mold-e/operations/info` endpoints
 
 ## ELB (Application Load Balancer)
@@ -395,7 +421,7 @@ ${CMD}
 1. `View/edit rules`, hit the `+` to add a new rule
 1. `Path` should be set to `TLO` and `Forward to` to your TLO instances
 1. `Save`
-1. Test the ELB via `curl --follow ALB-Experiment-763587424.us-west-2.elb.amazonaws.com/tlo`
+1. Test the ELB via `curl --follow --silent ALB-Experiment-763587424.us-west-2.elb.amazonaws.com/tlo`
 1. create mapping to /mold-e
 1. separate watcher scripts
 1. turn off an AZ
