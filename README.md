@@ -396,17 +396,19 @@ done
 ```
 
 ## Spin Up ELB Instances (Application Load Balancer)
-1. Create another Docker AMI, this time **do not install the docker container**
+1. Create another Docker AMI, this time **do not install the docker containers**
 1. Create 4 machines from the AMI but **install user data** with the Docker container script from the previous exercise
+1. ALB wants instances in at least two AZs so **ensure you have the 4 instances split between 2 AZs**
 1. Have 2 instance be the `TLO` application. `APPLICATION_NAME=TLO`, `SERVER_PATH=/tlo`, `SERVER_PORT=8080`
 1. Have 2 instance be the `Mold-E` application. `APPLICATION_NAME=Mold-E`, `SERVER_PATH=/mold-e`, `SERVER_PORT=9090`
 1. Hit the `/tlo/operations/info` and `/mold-e/operations/info` endpoints
+1. It is **very important to test the endpoints** with so many moving parts
 
 ## ELB (Application Load Balancer)
 1. `Create Load Balancer`, `Application Load Balancer`
 1. `Name` can be anything you want
 1. `Scheme` should be `internet-facting`
-1. `Listeners` should be set to `HTTP` and port `80`
+1. `HTTP Listeners` port `80`
 1. Select **all** subnets in your VPC. The UI is odd in this context.
 1. Set your tags
 1. `Configure Security Settings`, `Configure Security Groups`
@@ -418,13 +420,35 @@ done
 1. Select **only the TLO instances** -- we need the others for another group
 1. `Review` and `Create`
 1. Wait for the balancer to be provisioned
-1. `View/edit rules`, hit the `+` to add a new rule
-1. `Path` should be set to `TLO` and `Forward to` to your TLO instances
-1. `Save`
-1. Test the ELB via `curl --follow --silent ALB-Experiment-763587424.us-west-2.elb.amazonaws.com/tlo`
-1. create mapping to /mold-e
-1. separate watcher scripts
-1. turn off an AZ
+1. `Target Groups`, `Create Target Group`
+1. Create a `Mold-E` group that points to port `9090` and `/mold-e/operations/health`
+1. Select your load balancer
+1. `View/edit rules`, `Add Rules`, `Insert Rule`, `Path`, forward `/tlo/*` to `TLO`, `Save`
+1. Repeat but forward `/mold-e/*` to `Mold-E`
+1. Test the ELB via `curl --follow --silent ALB-Experiment-763587424.us-west-2.elb.amazonaws.com/tlo/operations/info`
+1. Test the ELB via `curl --follow --silent ALB-Experiment-763587424.us-west-2.elb.amazonaws.com/mold-e/operations/info`
+1. run the watcher script below
+1. turn off containers and watch how the ELB responds
+
+### Dual Application ALB Watch Script
+```
+#!/bin/bash
+
+ELB=${1:-dual-applications-classic-876351830.us-west-2.elb.amazonaws.com}
+DELAY=${2:-2}
+
+TLO="curl --location --silent ${ELB}:80/tlo/operations/info"
+MOLDE="curl --location --silent ${ELB}:80/mold-e/operations/info"
+
+for (( ; ; ))
+do
+   ${TLO} | python -m json.tool
+   echo
+   ${MOLDE} | python -m json.tool
+   sleep ${DELAY}
+done
+```
+
 
 ## Search For Untagged Resources
 1. In the console, `Resource Groups`
