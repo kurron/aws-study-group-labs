@@ -451,6 +451,19 @@ do
 done
 ```
 
+# Lab 9: EC2 Container Service Development Instance
+1. Create API Keys
+1. Start an Amazon Linux AMI
+1. `sudo yum update` to apply any OS updates
+1. `aws --version` to verify the AWS CLI is installed
+1. `aws configure` to setup the tool
+1. Install [ECS CLI](https://github.com/aws/amazon-ecs-cli)
+1. `curl --output ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-v0.4.1`
+1. `chmod a+x ecs-cli`
+1. `sudo mv ecs-cli /usr/local/bin`
+1. `ecs-cli --version`
+1. `ecs-cli help configure` -- to see how to configure the tool
+
 
 ## Search For Untagged Resources
 1. In the console, `Resource Groups`
