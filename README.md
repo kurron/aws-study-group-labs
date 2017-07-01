@@ -451,7 +451,33 @@ do
 done
 ```
 
-# Lab 9: EC2 Container Service Development Instance
+# Lab 9: EC2 Container Service: Creating The Cluster
+In this lab we'll create an empty cluster ready to accept work.
+
+1. `EC2 Container Service`, `Create Cluster`
+1. Use `transparent` as the cluster name
+1. **`Create an empty cluster`**
+
+These steps will spin up ECS configured EC2 instances that join the cluster.
+1. [Look up the AMI](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html) to use for your region
+1. Create 2 instances from the AMI -- ideally in different availability zones
+1. `t2.nano` should do just fine
+1. **Important:** `IAM Role` and select `ecsInstanceRole` from the list
+1. `Advanced Details` and enter the script below
+1. `Storage` and leave defaults
+1. Add your tags
+1. Use a wide-open security group
+1. Launch the instances
+1. Monitor the `ECS Instances` of the `Amazon ECS` view
+1. In a few minutes, your instances should be registered with the cluster
+
+## ECS Instance User Data Script
+```
+#!/bin/bash
+echo ECS_CLUSTER=transparent >> /etc/ecs/ecs.config
+```
+
+
 1. Create API Keys
 1. Start an Amazon Linux AMI
 1. `sudo yum update` to apply any OS updates
