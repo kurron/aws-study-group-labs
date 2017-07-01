@@ -507,6 +507,15 @@ echo ECS_CLUSTER=transparent >> /etc/ecs/ecs.config
 1. `curl --location --silent 54.200.196.150:8080/tlo/operations/info | python -m json.tool`
 1. Poke around the differnt views and see what information is available
 
+## Take One Instance Off-line
+1. select one of the instances in the `ECS Instances` view
+1. `Actions`, `Drain Instances`
+1. Did the 2nd container get moved to the remaining instance?
+1. How can we find out what happened?
+1. How can we fix things?
+
+---
+
 1. Create API Keys
 1. Start an Amazon Linux AMI
 1. `sudo yum update` to apply any OS updates
