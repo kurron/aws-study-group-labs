@@ -504,7 +504,8 @@ echo ECS_CLUSTER=transparent >> /etc/ecs/ecs.config
 ## Test The Services, The Ugly Way
 1. Obtain the public addresses of both EC2 instances
 1. Hit each instance and make sure it responds
-1. `curl --location --silent 54.200.196.150:8080/tlo/operations/info | python -m json.tool` 
+1. `curl --location --silent 54.200.196.150:8080/tlo/operations/info | python -m json.tool`
+1. Poke around the differnt views and see what information is available
 
 1. Create API Keys
 1. Start an Amazon Linux AMI
