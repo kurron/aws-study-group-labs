@@ -454,11 +454,12 @@ done
 # Lab 9: EC2 Container Service: Creating The Cluster
 In this lab we'll create an empty cluster ready to accept work.
 
+## Create Empty Cluster
 1. `EC2 Container Service`, `Create Cluster`
 1. Use `transparent` as the cluster name
 1. **`Create an empty cluster`**
 
-These steps will spin up ECS configured EC2 instances that join the cluster.
+## Create ECS Instances 
 1. [Look up the AMI](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html) to use for your region
 1. Create 2 instances from the AMI -- ideally in different availability zones
 1. `t2.nano` should do just fine
@@ -471,12 +472,39 @@ These steps will spin up ECS configured EC2 instances that join the cluster.
 1. Monitor the `ECS Instances` of the `Amazon ECS` view
 1. In a few minutes, your instances should be registered with the cluster
 
-## ECS Instance User Data Script
+### ECS Instance User Data Script
 ```
 #!/bin/bash
 echo ECS_CLUSTER=transparent >> /etc/ecs/ecs.config
 ```
 
+## Create ECS Task Definition
+1. `Amazon ECS`, `Task Definitions`, `Create new Task Definition`
+1. `Task Definition Name`: tlo
+1. `Task Role`: None
+1. `Network Mode`: Host, ignoring the warning
+1. `Add container` 
+1. `Container name`: TLO-hard-port
+1. `Image`: kurron/spring-cloud-aws-echo:latest 
+1. `Memory Limits (MB)`: Hard limit, 256 
+1. `Env Variables`: INFO_application_name, TLO
+1. `Env Variables`: SERVER_CONTEXT-PATH, /tlo
+1. `Add`, `Create`
+
+## Create ECS Service
+1. `Amazon ECS`, `Clusters`, `transparent`
+1. `Services, `Create`
+1. `Task Definition`: tlo
+1. `Cluster`: transparent
+1. `Serivce Name`: tlo-hard-port
+1. `Number of tasks`: 2
+1. `Create Service`, `View Service`
+1. Monitor the `Tasks` tab until both tasks are running
+
+## Test The Services, The Ugly Way
+1. Obtain the public addresses of both EC2 instances
+1. Hit each instance and make sure it responds
+1. `curl --location --silent 54.200.196.150:8080/tlo/operations/info | python -m json.tool` 
 
 1. Create API Keys
 1. Start an Amazon Linux AMI
