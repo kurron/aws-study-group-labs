@@ -514,6 +514,16 @@ echo ECS_CLUSTER=transparent >> /etc/ecs/ecs.config
 1. How can we find out what happened?
 1. How can we fix things?
 
+## Create Load Balancer
+1. `Application Load Balancer`
+1. Defaults are appropriate but *select all availability zones and subnets*
+1. **wide open security group**
+1. Create a new target group but it is a dummy one that won't be used
+1. **Do not** register any targets
+1. `Review` and `Create`
+1. Wait for it to be provisioned
+
+
 ---
 
 1. Create API Keys
