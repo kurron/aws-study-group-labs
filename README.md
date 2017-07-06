@@ -514,6 +514,8 @@ echo ECS_CLUSTER=transparent >> /etc/ecs/ecs.config
 1. How can we find out what happened?
 1. How can we fix things?
 
+# Lab 10: EC2 Container Service: Using an ELB
+
 ## Create Load Balancer
 1. `Application Load Balancer`
 1. Defaults are appropriate but *select all availability zones and subnets*
