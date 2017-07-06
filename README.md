@@ -523,6 +523,39 @@ echo ECS_CLUSTER=transparent >> /etc/ecs/ecs.config
 1. `Review` and `Create`
 1. Wait for it to be provisioned
 
+## Update Task Definition
+1. Select the `tlo` task definition
+1. `Create new revision`
+1. Change `Network Mode` from `Host` to `Bridge`
+1. Click `TLO-Hard-Port`
+1. Change the name to `TLO-Dynamic-Port`
+1. `Add port mapping`
+1. Leave `Host Port` blank, `Container Port` 8080
+1. `Update`
+1. `Create`
+
+## Create Load Balanced ECS Service
+1. `Amazon ECS`, `Clusters`, `transparent`
+1. `Services, `Create`
+1. `Task Definition`: **tlo:2**
+1. `Cluster`: transparent
+1. `Serivce Name`: tlo-dynamic-port
+1. `Number of tasks`: 2
+1. `Configure ELB`
+1. The defaults should be sufficient
+1. `Add to ELB`
+1. `Listener port` should be `80:HTTP`
+1. Change `Path pattern` to `/tlo*`
+1. `Evaluation order` to 1
+1. Change `Health check path` to `/tlo/operations/health`
+1. `Save`
+1. `Create Service`, `View Service`
+1. Monitor the `Tasks` tab until both tasks are running
+1. Check the `Events` tab
+1. cURL the ELB endpoint: `curl --silent ecs-balancer-1527593673.us-west-2.elb.amazonaws.com/tlo/operations/info | python -m json.tool`
+1. Traffic should be balanced between the instances
+1. Change number of desired tasks and see what happens
+
 
 ---
 
