@@ -624,6 +624,20 @@ echo ECS_CLUSTER=transparent >> /etc/ecs/ecs.config
 ## Automate Instance Creation via Terraform
 
 # Proposed Remaining Module Sequence
+
+## Automation via AWS CLI and Bash
+## [S3 Masterclass](https://acloud.guru/courses/)
+## [AWS Lambda](https://acloud.guru/courses/)
+## [Introduction to AWS CloudFormation](https://acloud.guru/courses/)
+## [Alexa - A Free Introduction](https://acloud.guru/courses/)
+## [AWS Cost Control](https://acloud.guru/courses/)
+## [Docker for DevOps - From Development to Production](https://acloud.guru/courses/)
+## [AWS CodeDeploy](https://acloud.guru/courses/)
+## [Alexa Development For Absolute Beginners](https://acloud.guru/courses/)
+## [AWS Security](https://acloud.guru/courses/)
+## [AWS Event Driven Security](https://acloud.guru/courses/)
+
+## [Cloud Computing With AWS](https://www.safaribooksonline.com/library/view/cloud-computing-with/9781771371209/)
 1. AutoScaling and CloudWatch
 1. CloudFormation
 1. Storage in AWS
@@ -638,7 +652,14 @@ echo ECS_CLUSTER=transparent >> /etc/ecs/ecs.config
 1. Identity And Access Management (IAM)
 1. Route 53
 1. Building A 3 Tier Scalable Web Application In The Cloud
-1. 
+
+## [Introduction to Ansible](https://www.safaribooksonline.com/library/view/introduction-to-ansible/9781491955956/)
+1. Introduction To Ansible
+1. Setup, Installation And Configuration
+1. Ansible, Ansible-Docs, Ansible-Playbook
+1. Includes And Roles
+1. Playbooks Continued
+1. Special Topics
 
 # Tips and Tricks
 
