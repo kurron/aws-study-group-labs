@@ -558,6 +558,32 @@ echo ECS_CLUSTER=transparent >> /etc/ecs/ecs.config
 1. Traffic should be balanced between the instances
 1. Change number of desired tasks and see what happens
 
+## Create Launch Configuration
+1. Use the ECS optomized AMI used in the prior labs
+1. Use that to AMI to configure your Launch Configuration
+1. Give it the `ecsInstanceRole` used in the previous labs
+1. Specify the `User Data` that will join the instance to the cluster
+1. Specify `Assign a public IP address to every instance.` in case you need to SSH in
+1. Select a wide-open security group
+
+## Create Auto Scaling Group
+1. Select your launch configuration
+1. Make sure to launch into your VPC
+1. Add a public subnet from each AZ
+1. **Do not** enable `Load Balancing`.  That is for classic ELB.
+1. Pick `Use scaling policies to adjust the capacity of this group`
+1. Scale between 1 and 4 instances based on 75% CPU
+1. Fill in tags, accepting defaults in other screens
+1. Review and Save
+1. Monitor the group and ensure 1 instance comes up
+1. Poke around the Scaling Group UI and see what is available
+1. Ensure your new instance joined the ECS cluster
+
+## Attach Auto Scaling Group To ELB
+1. Edit your ASG
+1. In `Target Group`, select your target group.
+1. In `Health Check Type`, select your `ELB`.
+1. `Save`
 
 ---
 
