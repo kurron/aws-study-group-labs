@@ -558,6 +558,8 @@ echo ECS_CLUSTER=transparent >> /etc/ecs/ecs.config
 1. Traffic should be balanced between the instances
 1. Change number of desired tasks and see what happens
 
+# Lab 11: EC2 Container Service: Using an ELB and Auto Scaling Group
+
 ## Create Launch Configuration
 1. Use the ECS optomized AMI used in the prior labs
 1. Use that to AMI to configure your Launch Configuration
@@ -645,13 +647,12 @@ echo ECS_CLUSTER=transparent >> /etc/ecs/ecs.config
 1. `jq --version`
 1. Verify that tab completion works on the `aws` command, eg `aws ec2 des` *tab key*
 
-## Automate Instance Creation via Bash
-## Automate Instance Creation via Ansible
-## Automate Instance Creation via Terraform
+---
 
-# Proposed Remaining Module Sequence
+# Proposed Remaining Module Ideas
 
 ## Automation via AWS CLI and Bash
+## Automation via Terraform
 ## [S3 Masterclass](https://acloud.guru/)
 ## [AWS Lambda](https://acloud.guru/)
 ## [Introduction to AWS CloudFormation](https://acloud.guru/)
