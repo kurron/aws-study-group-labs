@@ -626,16 +626,16 @@ echo ECS_CLUSTER=transparent >> /etc/ecs/ecs.config
 # Proposed Remaining Module Sequence
 
 ## Automation via AWS CLI and Bash
-## [S3 Masterclass](https://acloud.guru/courses/)
-## [AWS Lambda](https://acloud.guru/courses/)
-## [Introduction to AWS CloudFormation](https://acloud.guru/courses/)
-## [Alexa - A Free Introduction](https://acloud.guru/courses/)
-## [AWS Cost Control](https://acloud.guru/courses/)
-## [Docker for DevOps - From Development to Production](https://acloud.guru/courses/)
-## [AWS CodeDeploy](https://acloud.guru/courses/)
-## [Alexa Development For Absolute Beginners](https://acloud.guru/courses/)
-## [AWS Security](https://acloud.guru/courses/)
-## [AWS Event Driven Security](https://acloud.guru/courses/)
+## [S3 Masterclass](https://acloud.guru/)
+## [AWS Lambda](https://acloud.guru/)
+## [Introduction to AWS CloudFormation](https://acloud.guru/)
+## [Alexa - A Free Introduction](https://acloud.guru/)
+## [AWS Cost Control](https://acloud.guru/)
+## [Docker for DevOps - From Development to Production](https://acloud.guru/)
+## [AWS CodeDeploy](https://acloud.guru/)
+## [Alexa Development For Absolute Beginners](https://acloud.guru/)
+## [AWS Security](https://acloud.guru/)
+## [AWS Event Driven Security](https://acloud.guru/)
 
 ## [Cloud Computing With AWS](https://www.safaribooksonline.com/library/view/cloud-computing-with/9781771371209/)
 1. AutoScaling and CloudWatch
