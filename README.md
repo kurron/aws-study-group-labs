@@ -623,6 +623,23 @@ echo ECS_CLUSTER=transparent >> /etc/ecs/ecs.config
 ## Automate Instance Creation via Ansible
 ## Automate Instance Creation via Terraform
 
+# Proposed Remaining Module Sequence
+1. AutoScaling and CloudWatch
+1. CloudFormation
+1. Storage in AWS
+1. Relational Database Service
+1. Simple Storage Service
+1. CloudFront
+1. ElastiCache
+1. Virtual Private Cloud
+1. Simple Notification Service
+1. Simple Email Service
+1. Simple Queuing Service
+1. Identity And Access Management (IAM)
+1. Route 53
+1. Building A 3 Tier Scalable Web Application In The Cloud
+1. 
+
 # Tips and Tricks
 
 # Troubleshooting
