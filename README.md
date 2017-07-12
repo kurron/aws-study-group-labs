@@ -592,7 +592,7 @@ echo ECS_CLUSTER=transparent >> /etc/ecs/ecs.config
 1. Kill the stress program and monitor the ASG
 1. What happens? How long does it take?
 1. If we chose to `Disable scale-in` what would happen?
-1. Lower the warmup time in the ASG to 60 seconds and re-run the experiment.  What happens?
+1. Try configuring Step Scaling, which is the recommended method, and re-run the exeriment
 1. **Clean up your ASG** or you will always be running an instance!
 
 # Lab 12: EC2 Container Service: Using an ELB and Auto Scaling Group
