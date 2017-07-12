@@ -558,7 +558,44 @@ echo ECS_CLUSTER=transparent >> /etc/ecs/ecs.config
 1. Traffic should be balanced between the instances
 1. Change number of desired tasks and see what happens
 
-# Lab 11: EC2 Container Service: Using an ELB and Auto Scaling Group
+# Lab 11: EC2 and Auto Scaling Groups
+
+## Create Launch Configuration
+1. `Create launch configuration`
+1. Pick Amazon Linux AMI and run it on a `t2.nano`
+1. Name it `ec2-asg` and click `Enable CloudWatch detailed monitoring`
+1. Make sure it gets a public address because we need to SSH into the boxes
+1. Attach a wide-open security group
+1. `Create launch configuration`
+1. `Close`
+
+## Create Auto Scaling Group
+1. `Create Auto Scaling group`
+1. Select `ec2-asg` from the list, `Next Step`
+1. Name it `ec2-asg` and start with 1 instance
+1. Select your VPC and all public subnets within it
+1. `Advanced` and select `Enable CloudWatch detailed monitoring`
+1. `Configure scaling policies`, `Use scaling policies to adjust the capacity of this group`
+1. Scale between 1 and 6 instances
+1. `Average CPU Utilization` and `Target Value` of 50
+1. Give the instances 300 seconds to warm up
+1. `Configure Notifications`, `Configure Tags`, `Create Auto Scaling Group`
+1. Verify that you have one instance spinning up
+
+## Simulate High CPU Load
+1. SSH into the instance
+1. `sudo yum update`, `sudo yum install stress`
+1. `stress --verbose --cpu 8`
+1. In another terminal, SSH into the instance and run `top` to ensure 100% of the CPU is being used
+1. Monitor the `Activity History` and `Instances` tab in your ASG view
+1. What happens? How long does it take?
+1. Kill the stress program and monitor the ASG
+1. What happens? How long does it take?
+1. If we chose to `Disable scale-in` what would happen?
+1. Lower the warmup time in the ASG to 60 seconds and re-run the experiment.  What happens?
+1. **Clean up your ASG** or you will always be running an instance!
+
+# Lab 12: EC2 Container Service: Using an ELB and Auto Scaling Group
 
 ## Create Launch Configuration
 1. Use the ECS optomized AMI used in the prior labs
