@@ -578,21 +578,23 @@ echo ECS_CLUSTER=transparent >> /etc/ecs/ecs.config
 1. `Configure scaling policies`, `Use scaling policies to adjust the capacity of this group`
 1. Scale between 1 and 6 instances
 1. `Average CPU Utilization` and `Target Value` of 50
-1. Give the instances 300 seconds to warm up
+1. Give the instances 10 seconds to warm up
+1. Set `Health Check Grace` to 60 seconds
 1. `Configure Notifications`, `Configure Tags`, `Create Auto Scaling Group`
 1. Verify that you have one instance spinning up
 
 ## Simulate High CPU Load
 1. SSH into the instance
 1. `sudo yum update`, `sudo yum install stress`
-1. `stress --verbose --cpu 8`
+1. `stress --verbose --cpu 1`
 1. In another terminal, SSH into the instance and run `top` to ensure 100% of the CPU is being used
 1. Monitor the `Activity History` and `Instances` tab in your ASG view
 1. What happens? How long does it take?
 1. Kill the stress program and monitor the ASG
 1. What happens? How long does it take?
 1. If we chose to `Disable scale-in` what would happen?
-1. Try configuring Step Scaling, which is the recommended method, and re-run the exeriment
+1. Change `Health Check Grace` to the default 300 seconds and re-run the experiment.
+1. Try configuring Step Scaling and re-run the exeriment
 1. **Clean up your ASG** or you will always be running an instance!
 
 # Lab 12: EC2 Container Service: Using an ELB and Auto Scaling Group
