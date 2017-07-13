@@ -580,6 +580,7 @@ echo ECS_CLUSTER=transparent >> /etc/ecs/ecs.config
 1. `Average CPU Utilization` and `Target Value` of 50
 1. Give the instances 10 seconds to warm up
 1. Set `Health Check Grace` to 60 seconds
+1. Set `Default Cooldown` to 60 seconds
 1. `Configure Notifications`, `Configure Tags`, `Create Auto Scaling Group`
 1. Verify that you have one instance spinning up
 
