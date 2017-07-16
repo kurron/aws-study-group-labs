@@ -599,33 +599,98 @@ echo ECS_CLUSTER=transparent >> /etc/ecs/ecs.config
 1. **Clean up your ASG** or you will always be running an instance!
 
 # Lab 12: EC2 Container Service: Using an ELB and Auto Scaling Group
+Based on how long it took us to simulate resource exhaustion, this lab
+will just be about noting where in the console the auto scaling option
+for containers exists.  You can trigger scaling events on your own time.
 
-## Create Launch Configuration
-1. Use the ECS optomized AMI used in the prior labs
-1. Use that to AMI to configure your Launch Configuration
-1. Give it the `ecsInstanceRole` used in the previous labs
-1. Specify the `User Data` that will join the instance to the cluster
-1. Specify `Assign a public IP address to every instance.` in case you need to SSH in
-1. Select a wide-open security group
+1. select an existing service definition and `Update` it
+1. Under `Optional configuration`, click `Configure Service Auto Scaling`
+1. `Configure Service Auto Scaling to adjust your service’s desired count`
+1. `Add scaling policy`, `Create new Alarm`
+1. Notice how not only can we use the pre-baked RAM and CPU triggers but we can also create our own.
+1. *NOTE:* we can combine EC2 instance scaling with ECS container scaling
 
-## Create Auto Scaling Group
-1. Select your launch configuration
-1. Make sure to launch into your VPC
-1. Add a public subnet from each AZ
-1. **Do not** enable `Load Balancing`.  That is for classic ELB.
-1. Pick `Use scaling policies to adjust the capacity of this group`
-1. Scale between 1 and 4 instances based on 75% CPU
-1. Fill in tags, accepting defaults in other screens
-1. Review and Save
-1. Monitor the group and ensure 1 instance comes up
-1. Poke around the Scaling Group UI and see what is available
-1. Ensure your new instance joined the ECS cluster
 
-## Attach Auto Scaling Group To ELB
-1. Edit your ASG
-1. In `Target Group`, select your target group.
-1. In `Health Check Type`, select your `ELB`.
+# Lab 13: API Gateway
+We'll need to understand the basics of API Gateway before we can move
+on to our final compute capability, Lambdas. Watching the API Gateway
+video prior to this lab is **highly recommended**.
+
+## Create the API
+1. A working TLO echo service is required. Past labs provide at least 3 possible ways of doing this.
+1. Select `API Gateway` in the console
+1. `Create API`, `New API`
+1. Name it `aws-study-group`, put in a description followed by `Create API`
+1. Select the `/` resource and click `Actions` and select `Create Method`
+1. Select `ANY` from the dropdown and click the check mark.
+1. `Integration type` of HTTP, check `Use HTTP Proxy integration`, enter in your TLO endpoint, then `Save`
+
+## Have Method Request Forward Host Header
+1. Click `Method Request`
+1. Expand `HTTP Request Headers` then `Add header`
+1. `Name` should be `host` and click the check mark.
+1. Check the `Required` check box.
+
+## Have Integration Request Translate Host Header
+1. Click `Integration Request` and expand `HTTP Headers`
+1. `Add header`, `Name` should be `x-forwarded-host`, `Mapped from` should be `method.request.header.host`, click the check mark
+
+## Test Gateway Endpoint Internally
+1. Click the `Test` link
+1. Test a `GET` request
+
+## Publish The API
+1. Select the API in the tree
+1. `Actions`, `Deploy API`
+1. Create a new stage called `production` and `Deploy`
+1. cURL the API endpoint
+1. Notice the `calculated-return-path` and `x-forwarded-host` properties
+1. cURL the `/operations/info` endpoint.  What happens?
+
+## Proxy After Slash
+1. `Resources`, `Actions`, `Create Resource`
+1. Check `Configure as proxy resource`, `Create Resource`
+1. `HTTP Proxy`
+1. `Endpoint URL` should have your endpoint plus the `{proxy}`, eg `http://54.202.176.194:8080/{proxy}`
 1. `Save`
+1. Publish the API again
+1. Try cURLing the operations endpoint again
+
+## Generate API Key
+1. Select `API Keys`
+1. `Actions`, `Create API Key`
+1. Name it `aws-study-group`
+1. `Save`
+
+## Use API Key
+1. Select your API
+1. Select `ANY`, `Method Request`
+1. Change `API Key Required` to true
+1. Republish the API
+1. cURL the slash endpoint.  What happens?
+1. Add the `x-api-key` header using your API key to the request
+1. cURL the slash endpoint.  What happens?
+
+## Configure Usage Plan
+1. `Usage Plans`, `Create`
+1. Name it `aws-study-group-usage-plan`
+1. Set the `Rate` to `1` and the `Burst` to `2`
+1. Limit to `10` requests per `Day`
+1. `Next`
+1. `Add API Stage` and assoctiate the `production` stage of your API
+1. `Next`, `Add API Key to Usage Plan`
+1. Associate the API key to the plan, `Done`
+1. Try cURLing the endpoint again.  What happens?
+
+## Exceed Usage Plan
+1. Hit the endpoint several more times? What happens?
+1. `Usage Plans`, `aws-study-group-usage-plan`, `API Keys`, `Extension`
+1. Give the key 5 more requests for the day
+1. cURL again.  What happens?
+
+## Configure Usage Plan Part Duex
+1. Add the other resource to the Usage plan
+1. Hit `/operations/info` and verify that limits are working
 
 ---
 
