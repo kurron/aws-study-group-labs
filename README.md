@@ -624,6 +624,7 @@ video prior to this lab is **highly recommended**.
 1. Select the `/` resource and click `Actions` and select `Create Method`
 1. Select `ANY` from the dropdown and click the check mark.
 1. `Integration type` of HTTP, check `Use HTTP Proxy integration`, enter in your TLO endpoint, then `Save`
+1. eg. `http://ecs-balancer-1527593673.us-west-2.elb.amazonaws.com/tlo/`
 
 ## Have Method Request Forward Host Header
 1. Click `Method Request`
@@ -643,7 +644,7 @@ video prior to this lab is **highly recommended**.
 1. Select the API in the tree
 1. `Actions`, `Deploy API`
 1. Create a new stage called `production` and `Deploy`
-1. cURL the API endpoint
+1. cURL the API endpoint, eg `https://a8eu4cq3gl.execute-api.us-west-2.amazonaws.com/production/`
 1. Notice the `calculated-return-path` and `x-forwarded-host` properties
 1. cURL the `/operations/info` endpoint.  What happens?
 
@@ -651,10 +652,10 @@ video prior to this lab is **highly recommended**.
 1. `Resources`, `Actions`, `Create Resource`
 1. Check `Configure as proxy resource`, `Create Resource`
 1. `HTTP Proxy`
-1. `Endpoint URL` should have your endpoint plus the `{proxy}`, eg `http://54.202.176.194:8080/{proxy}`
+1. `Endpoint URL` should have your endpoint plus the `{proxy}`, eg `http://ecs-balancer-1527593673.us-west-2.elb.amazonaws.com/tlo/{proxy}`
 1. `Save`
 1. Publish the API again
-1. Try cURLing the operations endpoint again
+1. Try cURLing the operations endpoint again, eg `curl https://w4f4fmcaa6.execute-api.us-west-2.amazonaws.com/production/operations/info/`
 
 # Lab 14: API Gateway Continued
 
