@@ -656,6 +656,8 @@ video prior to this lab is **highly recommended**.
 1. Publish the API again
 1. Try cURLing the operations endpoint again
 
+# Lab 14: API Gateway Continued
+
 ## Generate API Key
 1. Select `API Keys`
 1. `Actions`, `Create API Key`
