@@ -672,7 +672,9 @@ video prior to this lab is **highly recommended**.
 1. Republish the API
 1. cURL the slash endpoint.  What happens?
 1. Add the `x-api-key` header using your API key to the request
+1. Add `--header x-api-key:my api key` to the cURL command
 1. cURL the slash endpoint.  What happens?
+1. **NOTE:** you should be denied until a Usage Plan is attached
 
 ## Configure Usage Plan
 1. `Usage Plans`, `Create`
@@ -694,6 +696,10 @@ video prior to this lab is **highly recommended**.
 ## Configure Usage Plan Part Duex
 1. Add the other resource to the Usage plan
 1. Hit `/operations/info` and verify that limits are working
+
+# Lab 15: AWS Lambda -- What's For Dinner, Alexa?
+We will be following the steps in [Amazon Alexa Skill Recipe with Python 3.6](://medium.com/@jacquelinewilson/amazon-alexa-skill-recipe-1444e6ee45a6).  **IMPORTANT:** [set up a developer account](https://developer.amazon.com/home.html)
+prior to attempting the lab.
 
 ---
 
