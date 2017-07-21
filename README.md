@@ -701,6 +701,14 @@ video prior to this lab is **highly recommended**.
 We will be following the steps in [Amazon Alexa Skill Recipe with Python 3.6](://medium.com/@jacquelinewilson/amazon-alexa-skill-recipe-1444e6ee45a6).  **IMPORTANT:** [set up a developer account](https://developer.amazon.com/home.html)
 prior to attempting the lab.
 
+# Lab 16: AWS Lambda with API Gateway
+We'll be following the steps in [Using AWS Lambda with Amazon API Gateway (On-Demand Over HTTPS)](http://docs.aws.amazon.com/lambda/latest/dg/with-on-demand-https.html)
+
+# Lab 17: AWS Lambda and Scheduled Events
+We'll be following the steps in [Using AWS Lambda with Scheduled Events](http://docs.aws.amazon.com/lambda/latest/dg/with-scheduled-events.html)
+
+# Lab 18: AWS Lambda and S3
+We'll be following the steps in [Using AWS Lambda with Amazon S3](http://docs.aws.amazon.com/lambda/latest/dg/with-s3.html)
 ---
 
 1. Create API Keys
