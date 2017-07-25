@@ -701,6 +701,50 @@ video prior to this lab is **highly recommended**.
 We will be following the steps in [Amazon Alexa Skill Recipe with Python 3.6](https://medium.com/@jacquelinewilson/amazon-alexa-skill-recipe-1444e6ee45a6).  **IMPORTANT:** [set up a developer account](https://developer.amazon.com/home.html)
 prior to attempting the lab.
 
+## Intents
+```python
+{
+    "intents":[
+        {
+            "intent":"DinnerBotIntent"
+        }
+    ]
+}
+```
+
+## Sample Utterances
+```
+DinnerBotIntent What should I have for dinner
+DinnerBotIntent Do you have a dinner idea
+DinnerBotIntent Whats for dinner
+```
+
+## Lambda Code
+```python
+import random
+
+dinnerOptions = [
+    "Chicken",
+    "Beef",
+    "Pork",
+    "Fish",
+    "Vegetarian"
+]
+
+def lambda_handler( event, context ):
+    dinner = random.choice( dinnerOptions )
+    response = {
+        'version': '1.0',
+        'response': {
+            'outputSpeech': {
+                'type': 'PlainText',
+                'text': dinner
+            }
+        }
+    }
+    return response
+```
+
 # Lab 16: AWS Lambda with API Gateway
 We'll be following the steps in [Using AWS Lambda with Amazon API Gateway (On-Demand Over HTTPS)](http://docs.aws.amazon.com/lambda/latest/dg/with-on-demand-https.html)
 
