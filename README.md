@@ -698,7 +698,7 @@ video prior to this lab is **highly recommended**.
 1. Hit `/operations/info` and verify that limits are working
 
 # Lab 15: AWS Lambda -- What's For Dinner, Alexa?
-We will be following the steps in [Amazon Alexa Skill Recipe with Python 3.6](://medium.com/@jacquelinewilson/amazon-alexa-skill-recipe-1444e6ee45a6).  **IMPORTANT:** [set up a developer account](https://developer.amazon.com/home.html)
+We will be following the steps in [Amazon Alexa Skill Recipe with Python 3.6](https://medium.com/@jacquelinewilson/amazon-alexa-skill-recipe-1444e6ee45a6).  **IMPORTANT:** [set up a developer account](https://developer.amazon.com/home.html)
 prior to attempting the lab.
 
 # Lab 16: AWS Lambda with API Gateway
