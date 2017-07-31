@@ -753,7 +753,11 @@ We'll be following the steps in [Using AWS Lambda with Scheduled Events](http://
 
 # Lab 18: AWS Lambda and S3
 We'll be following the steps in [Using AWS Lambda with Amazon S3](http://docs.aws.amazon.com/lambda/latest/dg/with-s3.html)
+
+
 ---
+
+**Ron Notes. Ignore.**
 
 1. Create API Keys
 1. Start an Amazon Linux AMI
