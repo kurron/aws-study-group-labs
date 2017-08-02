@@ -754,6 +754,16 @@ We'll be following the steps in [Using AWS Lambda with Scheduled Events](http://
 # Lab 18: AWS Lambda and S3
 We'll be following the steps in [Using AWS Lambda with Amazon S3](http://docs.aws.amazon.com/lambda/latest/dg/with-s3.html)
 
+# Lab 19: AWS CloudFormation
+It has become apparent to me that people enjoy a "guided tour" as opposed to step-by-step instructions.
+So, for this lab, we'll outline a simple objective and let people figure out how to do it based
+on what was learned in the video.
+
+* Write a CloudFormation template that creates a new ECS cluster
+* Feel free to use [my personal template](https://github.com/kurron/cloud-formation-ecs-service) as a reference
+* You will need CLI access so I suggest creating a dedicated EC2 instance for this and future labs
+* You will need to access the CloudFormation [refence documentation](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-reference.html) to do this
+* For bonus points, launch your stack via the console
 
 ---
 
