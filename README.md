@@ -765,6 +765,16 @@ on what was learned in the video.
 * You will need to access the CloudFormation [refence documentation](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-reference.html) to do this
 * For bonus points, launch your stack via the console
 
+# Lab 20: Automation and AWS CLI
+1. spin up an Amazon Linux instance making sure to use an admin role
+1. ensure the CLI is installed via `aws --version`
+1. install git via `sudo yum update` followed by `sudo yum install git`
+1. `git --version`
+1. clone the study group materials, `git clone https://github.com/kurron/aws-study-group-labs.git`
+1. `cd aws-study-group-labs/labs/lab-20`
+1. `./sanity-check-cli.sh`
+1. edit `spin-up-instance-via-aws-cli.sh` so that is succeeds
+
 ---
 
 **Ron Notes. Ignore.**
