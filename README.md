@@ -774,7 +774,12 @@ on what was learned in the video.
 1. `cd aws-study-group-labs/labs/lab-20`
 1. `./sanity-check-cli.sh`
 1. edit `spin-up-instance-via-aws-cli.sh` so that is succeeds
+1. run the script a second time.  What happens?
+1. run the script a third time.  What happens?
 1. create a script that terminates the instance you just created
+
+# Lab 21: Automation and Ansible
+# Lab 22: Automation and Terraform
 
 ---
 
