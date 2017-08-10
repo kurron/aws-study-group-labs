@@ -6,12 +6,6 @@
 
 Description: This template creates a new EC2 Instance.
 
-Metadata:
-    Foo:
-        Description: 'something clever'
-    Bar:
-        Description: 'something clever'
-
 # These show up in the console and are expected to be provided by the operator
 Parameters:
     Name:
@@ -86,31 +80,7 @@ Resources:
                     - RegionToAmazonAMI
                     - Ref: 'AWS::Region'
                     - HVM64
-            InstanceType:
-                Ref: 'InstanceType'
-            KeyName:
-                Ref: 'SshKeyName'
-            SubnetId:
-                Ref: 'SubnetId'
-            Tags:
-            - Key: 'Name'
-              Value:
-                  Ref: 'Name'
-            - Key: 'Project'
-              Value:
-                  Ref: 'Project'
-            - Key: 'Purpose'
-              Value:
-                  Ref: 'Purpose'
-            - Key: 'Creator'
-              Value:
-                  Ref: 'Creator'
-            - Key: 'Environment'
-              Value:
-                  Ref: 'Environment'
-            - Key: 'Freetext'
-              Value:
-                  Ref: 'Freetext'
+# add properties to make use of all available parameters
 
 Outputs:
     Instance:
@@ -120,15 +90,5 @@ Outputs:
     AvailabilityZone:
         Description: 'The Availability Zone where the specified instance is launched.'
         Value: !GetAtt Instance.AvailabilityZone
-    PrivateDnsName:
-        Description: 'The private DNS name of the specified instance.'
-        Value: !GetAtt Instance.PrivateDnsName
-    PublicDnsName:
-        Description: 'The public DNS name of the specified instance.'
-        Value: !GetAtt Instance.PublicDnsName
-    PrivateIp:
-        Description: 'The private IP address of the specified instance.'
-        Value: !GetAtt Instance.PrivateIp
-    PublicIp:
-        Description: 'The public IP address of the specified instance.'
-        Value: !GetAtt Instance.PublicIp
+
+# output the remaining possible values as described in the document

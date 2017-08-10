@@ -13,7 +13,7 @@ VALIDATE="aws cloudformation validate-template --template-body ${TEMPLATELOCATIO
 echo ${VALIDATE}
 ${VALIDATE}
 
-CREATE="aws cloudformation create-stack --stack-name ${STACKNAME} \
+CREATE="aws cloudformation xxxxxx-stack --stack-name ${STACKNAME} \
                                         --template-body ${TEMPLATELOCATION} \
                                         --parameters ParameterKey=SubnetId,ParameterValue=${SUBNET} \
                                         --tags Key=Project,Value=${PROJECTNAME} \

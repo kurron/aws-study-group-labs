@@ -784,7 +784,14 @@ on what was learned in the video.
 1. reset the area via `git reset --hard`
 1. `git status` to ensure old changes no longer exist
 1. `git pull --rebase` to update the area with the new lab
-1. 
+1. Open the CloudFormation view in the console
+1. `cd labs/lab-21/`
+1. edit `cloudformation.yml` to utilize the supplied parameters
+1. `./validate-stack.sh` will validate the descriptor
+1. edit and run `./create-stack.sh` to spin up the stack
+1. `./create-stack.sh` a second time.  What happens?
+1. edit and run `./destroy-stack.sh` to clean things up
+
 ---
 
 # Lab 22: Automation and Ansible
