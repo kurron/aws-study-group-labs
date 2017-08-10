@@ -789,6 +789,7 @@ on what was learned in the video.
 1. edit `cloudformation.yml` to utilize the supplied parameters
 1. `./validate-stack.sh` will validate the descriptor
 1. edit and run `./create-stack.sh` to spin up the stack
+1. look at the stack in the console, especially the outputs and events
 1. `./create-stack.sh` a second time.  What happens?
 1. edit and run `./destroy-stack.sh` to clean things up
 
