@@ -778,10 +778,18 @@ on what was learned in the video.
 1. run the script a third time.  What happens?
 1. create a script that terminates the instance you just created
 
-# Lab 21: Automation and Ansible
-# Lab 22: Automation and Terraform
-
+# Lab 21: Automation and CloudFormation
+1. spin up the instance from Lab 20
+1. `cd aws-study-group-labs`
+1. reset the area via `git reset --hard`
+1. `git status` to ensure old changes no longer exist
+1. `git pull --rebase` to update the area with the new lab
+1. 
 ---
+
+# Lab 22: Automation and Ansible
+# Lab 23: Automation and Terraform
+
 
 **Ron Notes. Ignore.**
 
