@@ -1,0 +1,134 @@
+---
+# http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html
+
+# Cannot get this to work for some reason
+#AWSTemplateFormatVersion: AWSTemplateFormatVersion: '2010-09-09'
+
+Description: This template creates a new EC2 Instance.
+
+Metadata:
+    Foo:
+        Description: 'something clever'
+    Bar:
+        Description: 'something clever'
+
+# These show up in the console and are expected to be provided by the operator
+Parameters:
+    Name:
+        Description: 'The instance name'
+        Type: 'String'
+        Default: 'Weapon X'
+
+    Project:
+        Description: 'Project name this cluster is has been created for'
+        Type: 'String'
+        Default: 'Weapon X'
+
+    Purpose:
+        Description: 'What role the item is playing, eg. MySQL'
+        Type: 'String'
+        Default: 'Weapon X'
+
+    Creator:
+        Description: 'The person or tool that created the item, eg. rkurr@transparent.com or Ansible'
+        Type: 'String'
+        Default: 'Weapon X'
+
+    Environment:
+        Description: 'What context the item will be used in, eg, production, test, all, performance'
+        Type: 'String'
+        Default: 'Weapon X'
+
+    Freetext:
+        Description: 'Notes to apply, normally edited in the console.'
+        Type: 'String'
+        Default: 'Weapon X'
+
+    AvailabilityZone:
+        Description: 'The Availability Zone in which the instance is located'
+        Type: 'String'
+        Default: 'us-west-2a'
+
+    SshKeyName:
+        Description: 'The name of the Amazon EC2 key pair.'
+        Type: 'AWS::EC2::KeyPair::KeyName'
+        Default: 'asgard-lite-test'
+
+    InstanceType:
+        Description: 'The instance type, such as t2.micro.'
+        Type: 'String'
+        Default: 't2.nano'
+
+    SubnetId:
+        Description: 'ID of the subnet that you want to launch the instance into.'
+        Type: 'String'
+
+Mappings:
+    RegionToAmazonAMI:
+        us-east-1:
+            HVM64: ami-00000000
+        us-east-2:
+            HVM64: ami-00000000
+        us-west-1:
+            HVM64: ami-00000000
+        us-west-2:
+            HVM64: ami-6df1e514
+
+Resources:
+    # Create a new instance
+    Instance:
+        Type: "AWS::EC2::Instance"
+        Properties:
+            AvailabilityZone:
+                Ref: 'AvailabilityZone'
+            ImageId:
+                Fn::FindInMap:
+                    - RegionToAmazonAMI
+                    - Ref: 'AWS::Region'
+                    - HVM64
+            InstanceType:
+                Ref: 'InstanceType'
+            KeyName:
+                Ref: 'SshKeyName'
+            SubnetId:
+                Ref: 'SubnetId'
+            Tags:
+            - Key: 'Name'
+              Value:
+                  Ref: 'Name'
+            - Key: 'Project'
+              Value:
+                  Ref: 'Project'
+            - Key: 'Purpose'
+              Value:
+                  Ref: 'Purpose'
+            - Key: 'Creator'
+              Value:
+                  Ref: 'Creator'
+            - Key: 'Environment'
+              Value:
+                  Ref: 'Environment'
+            - Key: 'Freetext'
+              Value:
+                  Ref: 'Freetext'
+
+Outputs:
+    Instance:
+        Description: 'The instance id.'
+        Value:
+            Ref: Instance
+    AvailabilityZone:
+        Description: 'The Availability Zone where the specified instance is launched.'
+        Value: !GetAtt Instance.AvailabilityZone
+    PrivateDnsName:
+        Description: 'The private DNS name of the specified instance.'
+        Value: !GetAtt Instance.PrivateDnsName
+    PublicDnsName:
+        Description: 'The public DNS name of the specified instance.'
+        Value: !GetAtt Instance.PublicDnsName
+    PrivateIp:
+        Description: 'The private IP address of the specified instance.'
+        Value: !GetAtt Instance.PrivateIp
+    PublicIp:
+        Description: 'The public IP address of the specified instance.'
+        Value: !GetAtt Instance.PublicIp
