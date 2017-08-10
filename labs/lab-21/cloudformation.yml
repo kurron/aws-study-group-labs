@@ -59,13 +59,9 @@ Parameters:
         Type: 'String'
         Default: 't2.nano'
 
-    Subnets:
-        Description: 'Which subnets the EC2 instances should be deployed to.'
-        Type: List<AWS::EC2::Subnet::Id>
-
-    SecurityGroups:
-        Description: 'A list that contains the Amazon EC2 security groups to assign to the Amazon EC2 instance.'
-        Type: List<AWS::EC2::SecurityGroup::Id>
+    SubnetId:
+        Description: 'ID of the subnet that you want to launch the instance into.'
+        Type: 'String'
 
 Mappings:
     RegionToAmazonAMI:
@@ -94,8 +90,8 @@ Resources:
                 Ref: 'InstanceType'
             KeyName:
                 Ref: 'SshKeyName'
-            SecurityGroups:
-                Ref: 'SecurityGroups'
+            SubnetId:
+                Ref: 'SubnetId'
             Tags:
             - Key: 'Name'
               Value:
