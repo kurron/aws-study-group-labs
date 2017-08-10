@@ -117,23 +117,22 @@ Resources:
                   Ref: 'Freetext'
 
 Outputs:
+    Instance:
+        Description: 'The instance id.'
+        Value:
+            Ref: Instance
     AvailabilityZone:
         Description: 'The Availability Zone where the specified instance is launched.'
-        Value:
-            Ref: 'AvailabilityZone'
+        Value: !GetAtt Instance.AvailabilityZone
     PrivateDnsName:
         Description: 'The private DNS name of the specified instance.'
-        Value:
-            Ref: 'PrivateDnsName'
+        Value: !GetAtt Instance.PrivateDnsName
     PublicDnsName:
         Description: 'The public DNS name of the specified instance.'
-        Value:
-            Ref: 'PublicDnsName'
+        Value: !GetAtt Instance.PublicDnsName
     PrivateIp:
         Description: 'The private IP address of the specified instance.'
-        Value:
-            Ref: 'PrivateIp'
+        Value: !GetAtt Instance.PrivateIp
     PublicIp:
         Description: 'The public IP address of the specified instance.'
-        Value:
-            Ref: 'PublicIp'
+        Value: !GetAtt Instance.PublicIp
