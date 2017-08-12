@@ -6,6 +6,12 @@
 # export AWS_REGION=baz
 # running aws configure or using an instance with the proper IAM role also work
 
+# http://docs.ansible.com/ansible/latest/guide_aws.html
+# http://docs.ansible.com/ansible/latest/ec2_module.html
+
+# The goal is to spin up a single instance, applying our usual tags.  The information
+# required is very similar to what was required in the previous lab.
+
 ---
 - name: Spin Up New Instance
   hosts: localhost
@@ -15,6 +21,13 @@
         count: 1
         image: ami-6df1e514
         instance_type: t2.nano
+        instance_tags:
+            Name: AWS Study Group
+            Project: AWS Study Group
+            Purpose: Showcase Ansible automation
+            Creator: kurr@kurron.org
+            Environment: development
+            Freetext: This was super easy!
         key_name: asgard-lite-test
         region: us-west-2
         state: present
