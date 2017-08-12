@@ -1,0 +1,23 @@
+#!/usr/bin/env ansible-playbook
+
+# Depending on your environment, you MAY have to export variables into your environment
+# export AWS_ACCESS_KEY_ID=foo
+# export AWS_SECRET_ACCESS_KEY=bar
+# export AWS_REGION=baz
+# running aws configure or using an instance with the proper IAM role also work
+
+# http://docs.ansible.com/ansible/latest/guide_aws.html
+# http://docs.ansible.com/ansible/latest/ec2_module.html
+
+# The goal is to spin up a single instance, applying our usual tags.  The information
+# required is very similar to what was required in the previous lab.  Add in the missing
+# attributes to the task below.  Don't forget your tags!
+
+---
+- name: Spin Up New Instance
+  hosts: localhost
+  become: false
+  tasks:
+  - ec2:
+        state: present
+        wait: no

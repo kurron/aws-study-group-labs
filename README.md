@@ -794,6 +794,17 @@ on what was learned in the video.
 1. edit and run `./destroy-stack.sh` to clean things up
 
 # Lab 22: Automation and Ansible
+1. spin up the instance from Lab 20
+1. `cd aws-study-group-labs`
+1. reset the area via `git reset --hard`
+1. `git status` to ensure old changes no longer exist
+1. `git pull --rebase` to update the area with the new lab
+1. `cd labs/lab-22/`
+1. `./install-ansible.sh` to install Ansible
+1. edit `playbook.yml`adding the missing pieces
+1. `./playbook.yml` to run your playbook
+1. run the playbook a second time.  What happens?
+1. Compare the Ansible descriptor to the CloudFormation one.  Which do you prefer?
 
 ---
 
