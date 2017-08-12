@@ -793,9 +793,10 @@ on what was learned in the video.
 1. `./create-stack.sh` a second time.  What happens?
 1. edit and run `./destroy-stack.sh` to clean things up
 
+# Lab 22: Automation and Ansible
+
 ---
 
-# Lab 22: Automation and Ansible
 # Lab 23: Automation and Terraform
 
 

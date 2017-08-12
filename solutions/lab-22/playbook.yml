@@ -1,0 +1,22 @@
+#!/usr/bin/env ansible-playbook
+
+# Depending on your environment, you MAY have to export variables into your environment
+# export AWS_ACCESS_KEY_ID=foo
+# export AWS_SECRET_ACCESS_KEY=bar
+# export AWS_REGION=baz
+# running aws configure or using an instance with the proper IAM role also work
+
+---
+- name: Spin Up New Instance
+  hosts: localhost
+  become: false
+  tasks:
+  - ec2:
+        count: 1
+        image: ami-6df1e514
+        instance_type: t2.nano
+        key_name: asgard-lite-test
+        region: us-west-2
+        state: present
+        vpc_subnet_id: subnet-508eaf19
+        wait: no
