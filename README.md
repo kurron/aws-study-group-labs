@@ -459,7 +459,7 @@ In this lab we'll create an empty cluster ready to accept work.
 1. Use `transparent` as the cluster name
 1. **`Create an empty cluster`**
 
-## Create ECS Instances 
+## Create ECS Instances
 1. [Look up the AMI](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html) to use for your region
 1. Create 2 instances from the AMI -- ideally in different availability zones
 1. `t2.nano` should do just fine
@@ -483,10 +483,10 @@ echo ECS_CLUSTER=transparent >> /etc/ecs/ecs.config
 1. `Task Definition Name`: tlo
 1. `Task Role`: None
 1. `Network Mode`: Host, ignoring the warning
-1. `Add container` 
+1. `Add container`
 1. `Container name`: TLO-hard-port
-1. `Image`: kurron/spring-cloud-aws-echo:latest 
-1. `Memory Limits (MB)`: Hard limit, 256 
+1. `Image`: kurron/spring-cloud-aws-echo:latest
+1. `Memory Limits (MB)`: Hard limit, 256
 1. `Env Variables`: INFO_application_name, TLO
 1. `Env Variables`: SERVER_CONTEXT-PATH, /tlo
 1. `Add`, `Create`
@@ -806,9 +806,32 @@ on what was learned in the video.
 1. run the playbook a second time.  What happens?
 1. Compare the Ansible descriptor to the CloudFormation one.  Which do you prefer?
 
+# Lab 23: Automation and Terraform
+1. spin up the instance from Lab 20
+1. `cd aws-study-group-labs`
+1. reset the area via `git reset --hard`
+1. `git status` to ensure old changes no longer exist
+1. `git pull --rebase` to update the area with the new lab
+1. `cd labs/lab-23/`
+1. `./install-terraform.sh` to install Terraform
+1. edit `ec2-instance.tf` so it can spin up an EC2 instance.  **HINT:** there is very little to add.
+1. `terraform init` to initialize Terraform -- **don't supply a key pair**
+1. `terraform plan` to validate the file and see what changes are proposed
+1. `terraform apply` to execute the proposed changes
+1. `terraform show` to see the results of the execution
+1. visit the console and verify that the instance fully comes up
+1. edit `ec2-instance.tf` and add the key pair attribute
+1. `terraform plan` to see what changes are proposed
+1. What is interesting in the output?
+1. `terraform apply` to execute the proposed changes
+1. visit the console and verify that the instance fully comes up
+1. How many instances do you see?
+1. `terraform apply` again to see what happens
+1. `terraform destroy` to clean up
+1. Compare the Terraform descriptor to the Ansible and CloudFormation one.  Which do you prefer?
+
 ---
 
-# Lab 23: Automation and Terraform
 
 
 **Ron Notes. Ignore.**
