@@ -814,7 +814,7 @@ on what was learned in the video.
 1. `git pull --rebase` to update the area with the new lab
 1. `cd labs/lab-23/`
 1. `./install-terraform.sh` to install Terraform
-1. edit `ec2-instance.tf` so it can spin up an EC2 instance.  **HINT:** there is very little to add.
+1. edit `ec2-instance.tf` so it can spin up an EC2 instance.
 1. `terraform init` to initialize Terraform -- **don't supply a key pair**
 1. `terraform plan` to validate the file and see what changes are proposed
 1. `terraform apply` to execute the proposed changes
