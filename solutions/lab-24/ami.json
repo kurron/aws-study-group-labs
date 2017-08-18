@@ -1,0 +1,45 @@
+{
+    "description": "Builds a simple AMI based on Amazon Linux",
+    "min_packer_version": "1.0.3",
+
+    "variables": {
+        "region": "us-west-2",
+        "source_ami": "ami-aa5ebdd2",
+        "ssh_username": "ec2-user",
+        "instance_type": "t2.nano",
+        "subnet_id": "subnet-508eaf19",
+        "vpc_id": "vpc-7459a412"
+    },
+
+    "builders": [{
+        "type": "amazon-ebs",
+        "ami_name": "aws-study-group-{{timestamp}}",
+        "ami_description": "AMI built using Packer",
+        "associate_public_ip_address": true,
+        "instance_type": "{{ user `instance_type` }}",
+        "region": "{{ user `region` }}",
+        "source_ami": "{{ user `source_ami` }}",
+        "ssh_port": 22,
+        "ssh_username": "{{ user `ssh_username` }}",
+        "ssh_timeout": "5m",
+        "subnet_id": "{{ user `subnet_id` }}",
+        "vpc_id": "{{ user `vpc_id` }}",
+        "tags": {
+            "Name": "AWS Study Group",
+            "Purpose": "Showcase Packer",
+            "Project": "AWS Study Group",
+            "Creator": "Packer",
+            "Environment": "development",
+            "Freetext": "No notes yet."
+        }
+    }],
+    "provisioners": [
+        {
+            "type": "shell",
+            "inline": ["touch ~/packer-was-here.txt"]
+        }
+    ],
+    "post-processors": [
+    ]
+}
+
