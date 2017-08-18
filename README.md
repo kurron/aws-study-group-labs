@@ -831,6 +831,19 @@ on what was learned in the video.
 1. Compare the Terraform descriptor to the Ansible and CloudFormation one.  Which do you prefer?
 
 # Lab 24: Automation and Packer
+1. spin up the instance from Lab 20
+1. `cd aws-study-group-labs`
+1. reset the area via `git reset --hard`
+1. `git status` to ensure old changes no longer exist
+1. `git pull --rebase` to update the area with the new lab
+1. `cd labs/lab-24/`
+1. `./install-packer.sh`
+1. pull up `links.txt` and browse the Packer documentation
+1. edit `ami.json` filling in the missing information
+1. `./run-packer.sh` to execute your changes
+1. in the console, create an instance from your newly minted AMI
+1. ssh into the instance and see if the file you added is there
+1. have Packer use Ansible to install a package, like `tree`
 
 ---
 
