@@ -851,16 +851,16 @@ on what was learned in the video.
 
 ## Automation via AWS CLI and Bash
 ## Automation via Terraform
-## [S3 Masterclass](https://acloud.guru/)
-## [AWS Lambda](https://acloud.guru/)
-## [Introduction to AWS CloudFormation](https://acloud.guru/)
-## [Alexa - A Free Introduction](https://acloud.guru/)
-## [AWS Cost Control](https://acloud.guru/)
-## [Docker for DevOps - From Development to Production](https://acloud.guru/)
-## [AWS CodeDeploy](https://acloud.guru/)
-## [Alexa Development For Absolute Beginners](https://acloud.guru/)
-## [AWS Security](https://acloud.guru/)
-## [AWS Event Driven Security](https://acloud.guru/)
+## [S3 Masterclass](https://acloud.guru/learn/s3-masterclass)
+## [AWS Lambda](https://acloud.guru/learn/aws-lambda)
+## [Introduction to AWS CloudFormation](https://acloud.guru/learn/aws-cloudformation)
+## [Alexa - A Free Introduction](https://acloud.guru/learn/intro-alexa-free)
+## [AWS Cost Control](https://acloud.guru/learn/aws-cost-control)
+## [Docker for DevOps - From Development to Production](https://acloud.guru/learn/docker-devops-from-development-to-production)
+## [AWS CodeDeploy](https://acloud.guru/learn/aws-codedeploy)
+## [Alexa Development For Absolute Beginners](https://acloud.guru/learn/intro-alexa)
+## [AWS Security](https://acloud.guru/learn/aws-security)
+## [AWS Event Driven Security](https://acloud.guru/learn/event-driven-security)
 
 ## [Cloud Computing With AWS](https://www.safaribooksonline.com/library/view/cloud-computing-with/9781771371209/)
 1. AutoScaling and CloudWatch
