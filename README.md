@@ -845,6 +845,12 @@ on what was learned in the video.
 1. ssh into the instance and see if the file you added is there
 1. have Packer use Ansible to install a package, like `tree`
 
+# Lab 25: Simple Notification Service
+1. Spin up an EC2 instance running with an IAM role with admin rights
+1. Install the AWS cli
+1. [8.2 Creating Amazon SNS Topics and Subscriptions with AWS CLI](https://github.com/talentedmrjones/amazon-web-services-linux-operations/blob/master/Lesson%208%20Monitoring%20and%20Logging/8.2%20Creating%20Amazon%20SNS%20Topics%20and%20Subscriptions%20with%20AWS%20CLI/bash%20commands.txt)
+1. We will follow his instructions to create a topic and publish to it.  Since we are using a single account, our commands will be slightly different.
+
 ---
 
 # Proposed Remaining Module Ideas
